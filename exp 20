@@ -1,0 +1,70 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyM3fIRl9MDkk1jE1ltQYCM0",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/naveenkumarreddyganesham-ux/MLA0201-Machine-Learning-/blob/main/exp%2020\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "aKZzdFW2wf6F"
+      },
+      "outputs": [],
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "from sklearn.linear_model import LinearRegression\n",
+        "\n",
+        "# Dataset: Month and Sales\n",
+        "X = [[1], [2], [3], [4], [5], [6], [7], [8]]\n",
+        "y = [100, 120, 130, 150, 160, 180, 190, 210]\n",
+        "\n",
+        "# Train the model\n",
+        "model = LinearRegression()\n",
+        "model.fit(X, y)\n",
+        "\n",
+        "# Predict future sales\n",
+        "future_months = [[9], [10], [11], [12]]\n",
+        "predictions = model.predict(future_months)\n",
+        "\n",
+        "print(\"Future Sales Prediction:\")\n",
+        "for i in range(len(future_months)):\n",
+        "    print(\"Month\", future_months[i][0], \"Sales:\", round(predictions[i], 2))\n",
+        "\n",
+        "# Plot actual and predicted sales\n",
+        "plt.scatter(X, y, color=\"blue\", label=\"Actual Sales\")\n",
+        "plt.plot(X, model.predict(X), color=\"red\", label=\"Training Prediction\")\n",
+        "plt.plot(future_months, predictions, \"go--\", label=\"Future Sales\")\n",
+        "\n",
+        "plt.xlabel(\"Month\")\n",
+        "plt.ylabel(\"Sales\")\n",
+        "plt.title(\"Future Sales Prediction using Linear Regression\")\n",
+        "plt.legend()\n",
+        "plt.grid(True)\n",
+        "plt.show()"
+      ]
+    }
+  ]
+}
