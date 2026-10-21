@@ -1,0 +1,67 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyM+VWrdha+ElNOpUir4iOMH",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/naveenkumarreddyganesham-ux/MLA0201-Machine-Learning-/blob/main/exp%2014\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "hYCxgHHDs2O9"
+      },
+      "outputs": [],
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "from sklearn.linear_model import LinearRegression\n",
+        "\n",
+        "# Dataset: House size in square feet and price in lakhs\n",
+        "X = [[500], [700], [900], [1100], [1300], [1500]]\n",
+        "y = [15, 20, 25, 30, 35, 40]\n",
+        "\n",
+        "# Train the model\n",
+        "model = LinearRegression()\n",
+        "model.fit(X, y)\n",
+        "\n",
+        "# Predict house price\n",
+        "size = [[1000]]\n",
+        "price = model.predict(size)\n",
+        "\n",
+        "print(\"House Size:\", size[0][0], \"sq.ft\")\n",
+        "print(\"Predicted House Price:\", round(price[0], 2), \"lakhs\")\n",
+        "\n",
+        "# Plot graph\n",
+        "plt.scatter(X, y, color=\"blue\", label=\"Actual Prices\")\n",
+        "plt.plot(X, model.predict(X), color=\"red\", label=\"Predicted Prices\")\n",
+        "\n",
+        "plt.xlabel(\"House Size (sq.ft)\")\n",
+        "plt.ylabel(\"House Price (Lakhs)\")\n",
+        "plt.title(\"House Price Prediction\")\n",
+        "plt.legend()\n",
+        "plt.show()"
+      ]
+    }
+  ]
+}
