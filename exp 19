@@ -1,0 +1,97 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNnlxWCFccq5lEKo8xSsWC2",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/naveenkumarreddyganesham-ux/MLA0201-Machine-Learning-/blob/main/exp%2019\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "i3Yu5UF8v9li"
+      },
+      "outputs": [],
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "from sklearn.naive_bayes import GaussianNB\n",
+        "from sklearn.model_selection import train_test_split\n",
+        "from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay\n",
+        "\n",
+        "# Dataset: Income (in thousands), Credit Score\n",
+        "X = [\n",
+        "    [20, 500], [25, 520], [30, 550],\n",
+        "    [35, 580], [40, 600], [45, 650],\n",
+        "    [50, 680], [55, 700], [60, 750],\n",
+        "    [65, 780], [70, 800], [75, 820]\n",
+        "]\n",
+        "\n",
+        "# 0 = Rejected, 1 = Approved\n",
+        "y = [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1]\n",
+        "\n",
+        "# Split dataset\n",
+        "X_train, X_test, y_train, y_test = train_test_split(\n",
+        "    X, y, test_size=0.25, random_state=42\n",
+        ")\n",
+        "\n",
+        "# Train model\n",
+        "model = GaussianNB()\n",
+        "model.fit(X_train, y_train)\n",
+        "\n",
+        "# Predict\n",
+        "y_pred = model.predict(X_test)\n",
+        "\n",
+        "# Display accuracy\n",
+        "print(\"Accuracy:\", round(accuracy_score(y_test, y_pred) * 100, 2), \"%\")\n",
+        "\n",
+        "# Predict a new loan application\n",
+        "applicant = [[60, 750]]\n",
+        "prediction = model.predict(applicant)[0]\n",
+        "\n",
+        "if prediction == 1:\n",
+        "    print(\"Loan Status: Approved\")\n",
+        "else:\n",
+        "    print(\"Loan Status: Rejected\")\n",
+        "\n",
+        "# Plot loan status distribution\n",
+        "plt.hist(y, bins=[-0.5, 0.5, 1.5], rwidth=0.7)\n",
+        "plt.xticks([0, 1], [\"Rejected\", \"Approved\"])\n",
+        "plt.xlabel(\"Loan Status\")\n",
+        "plt.ylabel(\"Number of Applicants\")\n",
+        "plt.title(\"Bank Loan Prediction\")\n",
+        "plt.show()\n",
+        "\n",
+        "# Plot confusion matrix\n",
+        "cm = confusion_matrix(y_test, y_pred, labels=[0, 1])\n",
+        "display = ConfusionMatrixDisplay(\n",
+        "    confusion_matrix=cm,\n",
+        "    display_labels=[\"Rejected\", \"Approved\"]\n",
+        ")\n",
+        "display.plot()\n",
+        "plt.title(\"Confusion Matrix\")\n",
+        "plt.show()"
+      ]
+    }
+  ]
+}
